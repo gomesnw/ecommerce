@@ -1,4 +1,4 @@
-package dev.branchesandgomes.config;
+package dev.branchesandgomes.config.filter;
 
 import dev.branchesandgomes.model.UserDetailsImpl;
 import dev.branchesandgomes.model.UserEntity;

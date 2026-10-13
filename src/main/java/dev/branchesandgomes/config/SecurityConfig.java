@@ -1,5 +1,7 @@
 package dev.branchesandgomes.config;
 
+import dev.branchesandgomes.config.filter.TokenAuthFilter;
+import dev.branchesandgomes.config.filter.UserFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
     private final TokenAuthFilter tokenAuthFilter;
+    private final UserFilter userFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
@@ -27,6 +30,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(userFilter, TokenAuthFilter.class)
                 .build();
 
         return http.build();
