@@ -14,7 +14,7 @@ public class JwtService {
     private String secret;
     @Value("${jwt.expiration}")
     private Long expiration;
-    private final String issuer = "meudiariodeobras-backend";
+    private final String issuer = "ecommerce-backend";
 
 
     public String generateToken(UserEntity user) {
