@@ -1,26 +1,33 @@
 package dev.branchesandgomes.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private final TokenAuthFilter tokenAuthFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
 
-        http
-                .csrf(csrf -> csrf.disable())
+        http.csrf(AbstractHttpConfigurer::disable)
                 .headers(headers ->
-                        headers.frameOptions(frame -> frame.disable())
+                        headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().authenticated()
-                );
+                )
+                .addFilterBefore(tokenAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 
         return http.build();
     }
