@@ -1,4 +1,4 @@
-package dev.branchesandgomes;
+package dev.branchesandgomes.controller;
 
 import dev.branchesandgomes.dto.RegisterRequestDTO;
 import dev.branchesandgomes.service.RegisterService;

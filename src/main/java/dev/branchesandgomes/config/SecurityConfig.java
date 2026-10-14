@@ -22,6 +22,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final TokenAuthFilter tokenAuthFilter;
     private final UserFilter userFilter;
+    private final String[] PUBLIC_ENDPOINTS = {
+            "/api/auth/**"
+    };
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
@@ -31,7 +34,7 @@ public class SecurityConfig {
                         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
+                        .requestMatchers(PUBLIC_ENDPOINTS)
                 )
                 .addFilterBefore(tokenAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(userFilter, TokenAuthFilter.class)
