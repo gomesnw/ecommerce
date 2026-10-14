@@ -1,7 +1,7 @@
 package dev.branchesandgomes.config.context;
 
-import dev.branchesandgomes.model.CustomerEntity;
-import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.entity.CustomerEntity;
+import dev.branchesandgomes.model.entity.SellerEntity;
 
 public class AuthContext {
     private static ThreadLocal<CustomerEntity> customer = new ThreadLocal<>();

@@ -1,8 +1,8 @@
 package dev.branchesandgomes.service;
 
-import dev.branchesandgomes.model.CustomerEntity;
-import dev.branchesandgomes.model.SellerEntity;
-import dev.branchesandgomes.model.UserDetailsImpl;
+import dev.branchesandgomes.model.entity.CustomerEntity;
+import dev.branchesandgomes.model.entity.SellerEntity;
+import dev.branchesandgomes.model.entity.UserDetailsImpl;
 import dev.branchesandgomes.repository.CustomerRepository;
 import dev.branchesandgomes.repository.SellerRepository;
 import dev.branchesandgomes.utils.checks.NumberChecker;

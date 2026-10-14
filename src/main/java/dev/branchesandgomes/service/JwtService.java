@@ -1,8 +1,8 @@
 package dev.branchesandgomes.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import dev.branchesandgomes.model.CustomerEntity;
-import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.entity.CustomerEntity;
+import dev.branchesandgomes.model.entity.SellerEntity;
 import dev.branchesandgomes.model.enums.RoleType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

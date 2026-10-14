@@ -1,7 +1,7 @@
 package dev.branchesandgomes.service;
 
 import dev.branchesandgomes.exception.NotFountException;
-import dev.branchesandgomes.model.CustomerEntity;
+import dev.branchesandgomes.model.entity.CustomerEntity;
 import dev.branchesandgomes.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

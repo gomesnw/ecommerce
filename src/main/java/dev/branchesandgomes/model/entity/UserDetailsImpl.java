@@ -1,4 +1,4 @@
-package dev.branchesandgomes.model;
+package dev.branchesandgomes.model.entity;
 
 import lombok.Getter;
 import org.jspecify.annotations.Nullable;

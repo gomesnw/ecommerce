@@ -1,8 +1,8 @@
 package dev.branchesandgomes.config.filter;
 
-import dev.branchesandgomes.model.UserDetailsImpl;
-import dev.branchesandgomes.model.CustomerEntity;
-import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.entity.UserDetailsImpl;
+import dev.branchesandgomes.model.entity.CustomerEntity;
+import dev.branchesandgomes.model.entity.SellerEntity;
 import dev.branchesandgomes.model.enums.RoleType;
 import dev.branchesandgomes.service.GetCustomerByExternalIdService;
 import dev.branchesandgomes.service.GetSellerByExternalIdService;

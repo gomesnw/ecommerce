@@ -1,6 +1,6 @@
 package dev.branchesandgomes.repository;
 
-import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.entity.SellerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package dev.branchesandgomes.model;
+package dev.branchesandgomes.model.entity;
 
 import jakarta.persistence.Column;
 

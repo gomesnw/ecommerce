@@ -1,7 +1,7 @@
 package dev.branchesandgomes.config.filter;
 
 import dev.branchesandgomes.config.context.AuthContext;
-import dev.branchesandgomes.model.UserDetailsImpl;
+import dev.branchesandgomes.model.entity.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
