@@ -23,7 +23,7 @@ public class SecurityConfig {
     private final TokenAuthFilter tokenAuthFilter;
     private final UserFilter userFilter;
     private final String[] PUBLIC_ENDPOINTS = {
-            "/api/auth/**"
+            "/auth/**"
     };
 
     @Bean
@@ -34,11 +34,11 @@ public class SecurityConfig {
                         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(PUBLIC_ENDPOINTS)
+                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(userFilter, TokenAuthFilter.class)
-                .build();
+                .addFilterAfter(userFilter, TokenAuthFilter.class);
 
         return http.build();
     }

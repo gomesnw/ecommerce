@@ -1,7 +1,9 @@
 package dev.branchesandgomes.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import dev.branchesandgomes.model.UserEntity;
+import dev.branchesandgomes.model.CustomerEntity;
+import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.enums.RoleType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +19,27 @@ public class JwtService {
     private final String issuer = "ecommerce-backend";
 
 
-    public String generateToken(UserEntity user) {
+    public String generateToken(CustomerEntity customer) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         return JWT.create()
                 .withIssuer(issuer)
                 .withIssuedAt(creationDate())
                 .withExpiresAt(expirationDate())
-                .withSubject(user.getExternalId().toString())
+                .withSubject(customer.getExternalId().toString())
+                .withClaim("type", "CUSTOMER")
+                .sign(algorithm);
+    }
+
+    public String generateToken(SellerEntity seller) {
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        return JWT.create()
+                .withIssuer(issuer)
+                .withIssuedAt(creationDate())
+                .withExpiresAt(expirationDate())
+                .withSubject(seller.getExternalId().toString())
+                .withClaim("type", "SELLER")
                 .sign(algorithm);
     }
 
@@ -38,6 +53,19 @@ public class JwtService {
                 .getSubject();
 
         return UUID.fromString(subject);
+    }
+
+    public RoleType getUserTypeFromToken(String token) {
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        String type = JWT.require(algorithm)
+                .withIssuer(issuer)
+                .build()
+                .verify(token)
+                .getClaim("type")
+                .asString();
+
+        return RoleType.valueOf(type);
     }
 
     private Instant creationDate() {

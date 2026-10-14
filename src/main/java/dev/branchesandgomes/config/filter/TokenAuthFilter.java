@@ -1,8 +1,11 @@
 package dev.branchesandgomes.config.filter;
 
 import dev.branchesandgomes.model.UserDetailsImpl;
-import dev.branchesandgomes.model.UserEntity;
-import dev.branchesandgomes.service.GetUserByExternalIdService;
+import dev.branchesandgomes.model.CustomerEntity;
+import dev.branchesandgomes.model.SellerEntity;
+import dev.branchesandgomes.model.enums.RoleType;
+import dev.branchesandgomes.service.GetCustomerByExternalIdService;
+import dev.branchesandgomes.service.GetSellerByExternalIdService;
 import dev.branchesandgomes.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +25,8 @@ import java.util.UUID;
 @Component
 public class TokenAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    private final GetUserByExternalIdService getUserByExternalIdService;
+    private final GetCustomerByExternalIdService getCustomerByExternalIdService;
+    private final GetSellerByExternalIdService getSellerByExternalIdService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,10 +40,17 @@ public class TokenAuthFilter extends OncePerRequestFilter {
         if (token != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
                 UUID userExternalId = jwtService.getUserExternalIdFromToken(token);
-
-                UserEntity user = getUserByExternalIdService.execute(userExternalId);
-
-                UserDetailsImpl userDetails = new UserDetailsImpl(user);
+                RoleType userType = jwtService.getUserTypeFromToken(token);
+                UserDetailsImpl userDetails = switch (userType) {
+                    case CUSTOMER -> {
+                        CustomerEntity customer = getCustomerByExternalIdService.execute(userExternalId);
+                        yield new UserDetailsImpl(customer);
+                    }
+                    case SELLER -> {
+                        SellerEntity seller = getSellerByExternalIdService.execute(userExternalId);
+                        yield new UserDetailsImpl(seller);
+                    }
+                };
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 

@@ -1,8 +1,8 @@
 package dev.branchesandgomes.service;
 
 import dev.branchesandgomes.exception.NotFountException;
-import dev.branchesandgomes.model.UserEntity;
-import dev.branchesandgomes.repository.UserRepository;
+import dev.branchesandgomes.model.CustomerEntity;
+import dev.branchesandgomes.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
-public class GetUserByExternalIdService {
-    private final UserRepository userRepository;
+public class GetCustomerByExternalIdService {
+    private final CustomerRepository customerRepository;
 
-    public UserEntity execute(UUID externalId) {
-        return userRepository.findByExternalId(externalId)
+    public CustomerEntity execute(UUID externalId) {
+        return customerRepository.findByExternalId(externalId)
                 .orElseThrow(() -> new NotFountException("User with id '%s' not found".formatted(externalId)));
     }
 }

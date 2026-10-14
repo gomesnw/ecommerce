@@ -1,6 +1,6 @@
 package dev.branchesandgomes.config.filter;
 
-import dev.branchesandgomes.config.context.UserContext;
+import dev.branchesandgomes.config.context.AuthContext;
 import dev.branchesandgomes.model.UserDetailsImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,16 +25,23 @@ public class UserFilter extends OncePerRequestFilter {
                 && authentication.isAuthenticated()
                 && authentication.getPrincipal() instanceof UserDetailsImpl userDetails) {
 
-            UserContext.setUser(userDetails.getUser());
+            if (userDetails.getCustomer() != null) {
+                AuthContext.setCustomer(userDetails.getCustomer());
+            }
+
+            if (userDetails.getSeller() != null) {
+                AuthContext.setSeller(userDetails.getSeller());
+            }
 
         } else {
-            UserContext.setUser(null);
+            AuthContext.setCustomer(null);
+            AuthContext.setSeller(null);
         }
 
         try {
             filterChain.doFilter(request, response);
         } finally {
-            UserContext.cleanup();
+            AuthContext.cleanup();
         }
     }
 }
