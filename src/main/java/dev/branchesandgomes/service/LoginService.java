@@ -2,6 +2,7 @@ package dev.branchesandgomes.service;
 
 import dev.branchesandgomes.dto.LoginRequestDto;
 import dev.branchesandgomes.dto.LoginResponseDto;
+import dev.branchesandgomes.exception.InternalServerErrorException;
 import dev.branchesandgomes.model.UserDetailsImpl;
 import dev.branchesandgomes.model.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,16 @@ public class LoginService {
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        if (userDetails == null || userDetails.getUser() == null) {
+            throw new InternalServerErrorException("User não encontrado para o token");
+        }
+
         UserEntity user = userDetails.getUser();
 
         String accessToken = jwtService.generateToken(user);
 
-        return new LoginResponseDto(accessToken);
+        return new LoginResponseDto(accessToken, user.getRole());
     }
 
 }
