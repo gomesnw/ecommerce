@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
     private final CustomerRepository customerRepository;
 
-    public void execute(RegisterRequestDTO registerRequest){
+    public void customerRegister(RegisterRequestDTO registerRequest){
         CustomerEntity customerEntity = new CustomerEntity(
                 registerRequest.name(),
                 registerRequest.phone()

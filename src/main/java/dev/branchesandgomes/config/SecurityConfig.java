@@ -22,8 +22,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final TokenAuthFilter tokenAuthFilter;
     private final UserFilter userFilter;
-    private final String[] PUBLIC_ENDPOINTS = {
-            "/auth/**"
+    private static final String[] PUBLIC_ENDPOINTS = {
+            "/auth/**",
+            "/swagger-ui",
+            "/api-docs",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/v3/api-docs/**"
     };
 
     @Bean

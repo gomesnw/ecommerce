@@ -21,4 +21,12 @@ public class SellerEntity extends TenantOwnedBaseEntity {
 
     @Column(name = "active", nullable = false)
     private Boolean active = true;
+
+    public SellerEntity(String name, String email, String password, Long tenantId) {
+        super.setTenantId(tenantId);
+        this.person = new PersonEntity(name);
+        this.email = email;
+        this.password = password;
+    }
+
 }

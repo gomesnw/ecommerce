@@ -19,9 +19,9 @@ public class AuthController {
     private final RegisterService registerService;
     private final LoginService loginService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody @Valid RegisterRequestDTO request) {
-        registerService.execute(request);
+    @PostMapping("/customer/register")
+    public ResponseEntity<Void> customerRegister(@RequestBody @Valid RegisterRequestDTO request) {
+        registerService.customerRegister(request);
 
         return ResponseEntity.noContent().build();
     }
