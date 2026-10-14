@@ -1,3 +1,29 @@
 spring:
   application:
     name: ecommerce
+  datasource:
+    url: ${ENV_DB_URL}
+    username: ${ENV_DB_USERNAME}
+    password: ${ENV_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  profiles:
+    active: ${ENV_SPRING_PROFILE:local}
+  config:
+    import:  optional:classpath:.env[.properties]
+  docker:
+    compose:
+      enabled: false
+
+server:
+  servlet:
+    contextPath: /api
+
+jwt:
+  expiration: ${ENV_JWT_EXPIRATION:3600}
+  secret: ${ENV_JWT_SECRET}
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json

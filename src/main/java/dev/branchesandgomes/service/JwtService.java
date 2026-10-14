@@ -13,7 +13,7 @@ public class JwtService {
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")
-    private Long expiration;
+    private Long expirationSeconds;
     private final String issuer = "ecommerce-backend";
 
 
@@ -45,6 +45,6 @@ public class JwtService {
     }
 
     private Instant expirationDate() {
-        return Instant.now().plusSeconds(expiration);
+        return Instant.now().plusSeconds(expirationSeconds);
     }
 }
