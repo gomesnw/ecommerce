@@ -15,7 +15,7 @@ public class RegisterService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void execute(RegisterRequestDTO registerRequest, RoleType role){
+    public void execute(RegisterRequestDTO registerRequest){
         boolean exists = userRepository.existsByEmail(registerRequest.email());
 
         if(exists){
@@ -28,7 +28,7 @@ public class RegisterService {
                 registerRequest.email(),
                 passwordEncoder.encode(registerRequest.password()),
                 registerRequest.phone(),
-                role
+                RoleType.CUSTOMER
         );
 
         userRepository.save(userEntity);
