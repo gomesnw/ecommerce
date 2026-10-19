@@ -22,13 +22,12 @@ public class ProductEntity extends TenantOwnedBaseEntity {
     @JoinColumn(name = "category_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CategoryEntity category;
+    @Column(name = "category_id", insertable = false, updatable = false)
+    private Long categoryId;
 
     @NotNull
     @Column(name = "unit_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal unitPrice;
-
-    @Column(name = "category_id", insertable = false, updatable = false)
-    private Long categoryId;
 
     @Column(name = "image_url")
     private String imageUrl;

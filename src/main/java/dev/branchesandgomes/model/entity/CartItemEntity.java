@@ -19,7 +19,7 @@ public class CartItemEntity extends TenantOwnedBaseEntity{
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
     @Column(name = "customer_id", insertable = false, updatable = false)
     private Long customerId;
