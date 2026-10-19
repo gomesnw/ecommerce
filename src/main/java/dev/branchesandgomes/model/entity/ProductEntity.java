@@ -35,4 +35,15 @@ public class ProductEntity extends TenantOwnedBaseEntity {
 
     @Column(name = "stock",  nullable = false)
     private Integer stock = 0;
+
+    @Column(name = "active",  nullable = false)
+    private Boolean active = true;
+
+    public void addStock(int quantity) {
+        this.stock += quantity;
+    }
+
+    public void replaceStock(int quantity) {
+        this.stock = quantity;
+    }
 }
