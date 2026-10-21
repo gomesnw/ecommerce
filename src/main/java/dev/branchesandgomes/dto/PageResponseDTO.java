@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public record PageResponse<T> (
+public record PageResponseDTO<T> (
         int pageSize,
         int pageNumber,
         long totalElements,
@@ -12,8 +12,8 @@ public record PageResponse<T> (
         boolean isFirstPage,
         boolean isLastPage
 ) {
-    public static <T> PageResponse<T> from(Page<T> page) {
-        return new PageResponse<>(
+    public static <T> PageResponseDTO<T> from(Page<T> page) {
+        return new PageResponseDTO<>(
                 page.getSize(),
                 page.getNumber(),
                 page.getTotalElements(),

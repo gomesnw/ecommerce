@@ -1,9 +1,9 @@
 package dev.branchesandgomes.controller;
 
 import dev.branchesandgomes.config.context.AuthContext;
-import dev.branchesandgomes.dto.CartItemResponseDto;
-import dev.branchesandgomes.dto.PageResponse;
-import dev.branchesandgomes.dto.PageableRequest;
+import dev.branchesandgomes.dto.CartItemResponseDTO;
+import dev.branchesandgomes.dto.PageResponseDTO;
+import dev.branchesandgomes.dto.PageableRequestDTO;
 import dev.branchesandgomes.model.entity.CustomerEntity;
 import dev.branchesandgomes.service.GetCustomerAllCartItemsService;
 import jakarta.validation.Valid;
@@ -22,10 +22,10 @@ public class CartController {
     private final GetCustomerAllCartItemsService getCustomerAllCartItemsService;
 
     @GetMapping
-    public ResponseEntity<PageResponse<CartItemResponseDto>> getAllCartItems(@Valid PageableRequest pageableRequest) {
+    public ResponseEntity<PageResponseDTO<CartItemResponseDTO>> getAllCartItems(@Valid PageableRequestDTO pageableRequest) {
         CustomerEntity customer = AuthContext.getCustomer();
 
-        PageResponse<CartItemResponseDto> response = getCustomerAllCartItemsService.execute(customer.getId(), pageableRequest);
+        PageResponseDTO<CartItemResponseDTO> response = getCustomerAllCartItemsService.execute(customer.getId(), pageableRequest);
 
         return ResponseEntity.ok(response);
     }

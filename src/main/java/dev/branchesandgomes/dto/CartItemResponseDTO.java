@@ -4,7 +4,7 @@ import dev.branchesandgomes.model.entity.CartItemEntity;
 
 import java.math.BigDecimal;
 
-public record CartItemResponseDto(
+public record CartItemResponseDTO(
         String productName,
         String productDescription,
         BigDecimal productUnitPrice,
@@ -14,8 +14,8 @@ public record CartItemResponseDto(
         BigDecimal totalValue,
         Boolean available
 ) {
-  public static CartItemResponseDto from(CartItemEntity entity) {
-    return new CartItemResponseDto(
+  public static CartItemResponseDTO from(CartItemEntity entity) {
+    return new CartItemResponseDTO(
             entity.getProduct().getName(),
             entity.getProduct().getDescription(),
             entity.getProduct().getUnitPrice(),

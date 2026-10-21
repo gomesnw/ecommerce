@@ -31,11 +31,13 @@ public class UserFilter extends OncePerRequestFilter {
 
             if (userDetails.getSeller() != null) {
                 AuthContext.setSeller(userDetails.getSeller());
+                AuthContext.setTenantId(userDetails.getSeller().getTenantId());
             }
 
         } else {
             AuthContext.setCustomer(null);
             AuthContext.setSeller(null);
+            AuthContext.setTenantId(null);
         }
 
         try {
