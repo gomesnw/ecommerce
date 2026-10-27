@@ -26,7 +26,7 @@ public class CreateProductService {
                 request.name(),
                 category,
                 request.unitPrice(),
-                request.imageUrl(),
+                request.imageUrl(), //todo: viabilizar upload de imagem
                 request.stock(),
                 seller,
                 tenantId
