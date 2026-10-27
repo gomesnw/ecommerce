@@ -1,6 +1,6 @@
 package dev.branchesandgomes.service;
 
-import dev.branchesandgomes.exception.NotFountException;
+import dev.branchesandgomes.exception.NotFoundException;
 import dev.branchesandgomes.model.entity.CategoryEntity;
 import dev.branchesandgomes.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,6 @@ public class GetCategoryByExternalIdAndTenantIdService {
 
     public CategoryEntity execute(UUID externalId, Long tenantId){
         return categoryRepository.findByExternalIdAndTenantId(externalId, tenantId)
-                .orElseThrow(() -> new NotFountException("Categoria não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Categoria não encontrada"));
     }
 }

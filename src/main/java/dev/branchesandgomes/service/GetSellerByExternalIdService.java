@@ -1,6 +1,6 @@
 package dev.branchesandgomes.service;
 
-import dev.branchesandgomes.exception.NotFountException;
+import dev.branchesandgomes.exception.NotFoundException;
 import dev.branchesandgomes.model.entity.SellerEntity;
 import dev.branchesandgomes.repository.SellerRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,6 @@ public class GetSellerByExternalIdService {
 
     public SellerEntity execute(UUID externalId) {
         return sellerRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new NotFountException("Vendedor não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Vendedor não encontrado"));
     }
 }

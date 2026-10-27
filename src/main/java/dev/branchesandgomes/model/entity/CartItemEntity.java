@@ -24,9 +24,14 @@ public class CartItemEntity extends TenantOwnedBaseEntity{
     @Column(name = "customer_id", insertable = false, updatable = false)
     private Long customerId;
 
-    public CartItemEntity(ProductEntity product, CustomerEntity customer, Integer quantity) {
+    public CartItemEntity(ProductEntity product, CustomerEntity customer, Integer quantity, Long tenantId) {
         this.product = product;
         this.customer = customer;
         this.quantity = quantity;
+        this.setTenantId(tenantId);
+    }
+
+    public void addQuantity(int quantityToAdd) {
+        this.quantity += quantityToAdd;
     }
 }

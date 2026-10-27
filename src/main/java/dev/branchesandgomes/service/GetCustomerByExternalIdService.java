@@ -1,6 +1,6 @@
 package dev.branchesandgomes.service;
 
-import dev.branchesandgomes.exception.NotFountException;
+import dev.branchesandgomes.exception.NotFoundException;
 import dev.branchesandgomes.model.entity.CustomerEntity;
 import dev.branchesandgomes.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,6 @@ public class GetCustomerByExternalIdService {
 
     public CustomerEntity execute(UUID externalId) {
         return customerRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new NotFountException("User with id '%s' not found".formatted(externalId)));
+                .orElseThrow(() -> new NotFoundException("User with id '%s' not found".formatted(externalId)));
     }
 }

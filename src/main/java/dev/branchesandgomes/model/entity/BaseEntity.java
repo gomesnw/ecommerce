@@ -15,7 +15,7 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "public_id", unique = true, nullable = false, updatable = false)
+    @Column(name = "external_id", unique = true, nullable = false, updatable = false)
     private UUID externalId;
 
     @CreationTimestamp
