@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-public record PageableRequest(
+public record PageableRequestDTO(
         @NotNull(message = "O parâmetro 'pageSize' é obrigatório") Integer pageSize,
         @NotNull(message = "O parâmetro 'pageNumber' é obrigatório") Integer pageNumber,
         @NotNull(message = "O parâmetro 'sortDirection' é obrigatório") Sort.Direction sortDirection

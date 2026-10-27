@@ -15,6 +15,6 @@ public class GetSellerByExternalIdService {
 
     public SellerEntity execute(UUID externalId) {
         return sellerRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new NotFountException("Seller with id '%s' not found".formatted(externalId)));
+                .orElseThrow(() -> new NotFountException("Vendedor não encontrado"));
     }
 }

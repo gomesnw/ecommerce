@@ -1,8 +1,8 @@
 package dev.branchesandgomes.service;
 
-import dev.branchesandgomes.dto.CartItemResponseDto;
-import dev.branchesandgomes.dto.PageResponse;
-import dev.branchesandgomes.dto.PageableRequest;
+import dev.branchesandgomes.dto.CartItemResponseDTO;
+import dev.branchesandgomes.dto.PageResponseDTO;
+import dev.branchesandgomes.dto.PageableRequestDTO;
 import dev.branchesandgomes.model.entity.CartItemEntity;
 import dev.branchesandgomes.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 public class GetCustomerAllCartItemsService {
     private final CartItemRepository cartItemRepository;
 
-    public PageResponse<CartItemResponseDto> execute(Long customerId, PageableRequest pageableRequest) {
+    public PageResponseDTO<CartItemResponseDTO> execute(Long customerId, PageableRequestDTO pageableRequest) {
         PageRequest pageRequest = pageableRequest.toPageRequest("createdAt");
 
         Page<CartItemEntity> items = cartItemRepository.findAllByCustomerAndProductActiveTrue(customerId, pageRequest);
 
-        Page<CartItemResponseDto> itemResponse = items.map(CartItemResponseDto::from);
+        Page<CartItemResponseDTO> itemResponse = items.map(CartItemResponseDTO::from);
 
-        return PageResponse.from(itemResponse);
+        return PageResponseDTO.from(itemResponse);
     }
 }

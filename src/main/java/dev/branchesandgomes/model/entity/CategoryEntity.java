@@ -17,4 +17,11 @@ public class CategoryEntity extends TenantOwnedBaseEntity {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    public CategoryEntity(String name, String description, String imageUrl, Long tenantId) {
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.setTenantId(tenantId);
+    }
 }
