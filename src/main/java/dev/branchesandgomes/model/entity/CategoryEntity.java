@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Getter
 @NoArgsConstructor
 @Entity(name = "category_entity")
@@ -23,5 +25,16 @@ public class CategoryEntity extends TenantOwnedBaseEntity {
         this.description = description;
         this.imageUrl = imageUrl;
         this.setTenantId(tenantId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof CategoryEntity that)) return false;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 }
