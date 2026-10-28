@@ -31,7 +31,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/tenantId/{tenantExternalId}/products")
+    @GetMapping("/tenants/{tenantExternalId}/products")
     public ResponseEntity<PageResponseDTO<ListProductsResponseDTO>> listProducts(@PathVariable UUID tenantExternalId, @Valid PageableRequestDTO pageable) {
         PageResponseDTO<ListProductsResponseDTO> response = listProductsService.execute(pageable, tenantExternalId);
         return ResponseEntity.ok(response);
