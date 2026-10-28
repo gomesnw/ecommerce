@@ -19,7 +19,7 @@ import java.util.UUID;
 @PreAuthorize("hasRole('CUSTOMER')")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/{tenantExternalId}/cart")
+@RequestMapping("/tenantId/{tenantExternalId}/cart")
 public class CartController {
     private final GetCustomerAllCartItemsService getCustomerAllCartItemsService;
     private final AddItemToCartService addItemToCartService;
