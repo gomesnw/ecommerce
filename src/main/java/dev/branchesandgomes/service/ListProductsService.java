@@ -11,14 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ListProductsService {
     private final ProductRepository productRepository;
+    private final GetTenantByExternalIdService getTenantByExternalIdService;
 
-    public PageResponseDTO<ListProductsResponseDTO> execute(PageableRequestDTO pageable, Long tenantId) {
+    public PageResponseDTO<ListProductsResponseDTO> execute(PageableRequestDTO pageable, UUID tenantExternalId) {
+        Long tenantId = getTenantByExternalIdService.execute(tenantExternalId).getId();
         PageRequest pageRequest = pageable.toPageRequest("name");
 
         Page<ProductEntity> productsPage = productRepository.findAllByTenantIdAndActiveIsTrue(tenantId, pageRequest);

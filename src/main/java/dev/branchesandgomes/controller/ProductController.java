@@ -12,15 +12,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/products")
 public class ProductController {
     private final CreateProductService createProductService;
     private final ListProductsService listProductsService;
 
     @PreAuthorize("hasRole('SELLER')")
-    @PostMapping
+    @PostMapping("/products")
     public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody @Valid CreateProductRequestDTO request) {
         SellerEntity seller = AuthContext.getSeller();
         Long tenantId = AuthContext.getTenantId();
@@ -30,10 +31,9 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<PageResponseDTO<ListProductsResponseDTO>> listProducts(@Valid PageableRequestDTO pageable) {
-        Long tenantId = AuthContext.getTenantId();
-        PageResponseDTO<ListProductsResponseDTO> response = listProductsService.execute(pageable, tenantId);
+    @GetMapping("/{tenantExternalId}/products")
+    public ResponseEntity<PageResponseDTO<ListProductsResponseDTO>> listProducts(@PathVariable UUID tenantExternalId, @Valid PageableRequestDTO pageable) {
+        PageResponseDTO<ListProductsResponseDTO> response = listProductsService.execute(pageable, tenantExternalId);
         return ResponseEntity.ok(response);
     }
 }
